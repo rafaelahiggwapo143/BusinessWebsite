@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crisp PanTon Rolls | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    colors: { neonOrange: '#FF5500', neonYellow: '#FFC700', techDark: '#0B0F17', cardDark: '#161F30', borderDark: '#233047' }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.4; filter: blur(40px); } 50% { opacity: 0.8; filter: blur(60px); } }
+        .glow-effect { animation: pulseGlow 6s ease-in-out infinite; }
+        .glass-panel { background: rgba(22, 31, 48, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(255, 85, 0, 0.2); }
+    </style>
+</head>
+<body class="bg-techDark text-gray-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-neonOrange selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-techDark/90 backdrop-blur-xl border-b border-borderDark/60">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex items-center space-x-2 shrink-0">
+                <div class="bg-gradient-to-tr from-neonOrange to-neonYellow text-techDark p-2 rounded-xl font-bold shadow-lg shadow-neonOrange/20">
+                    <i data-lucide="flame" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </div>
+                <div>
+                    <span class="text-lg sm:text-2xl font-heading font-black text-white leading-none block">CRISP<span class="text-neonOrange">PANTON</span></span>
+                    <span class="hidden sm:block text-[9px] tracking-widest text-gray-400 font-mono uppercase mt-0.5">Cebu Eastern College</span>
+                </div>
+            </a>
+            
+            <!-- Desktop Links (Dynamically Controlled Based on Login State) -->
+            <div id="desktopNavLinks" class="hidden lg:flex items-center space-x-6 font-medium text-sm text-gray-300">
+                <a href="index.html" class="text-neonOrange font-bold">Home</a>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center space-x-2 shrink-0">
+                <!-- User Profile Icon (Only Visible when Logged In) -->
+                <a href="profile.html" id="profileIconBtn" title="User Profile" class="hidden p-2 rounded-xl bg-cardDark border border-borderDark text-neonYellow hover:border-neonOrange transition flex items-center justify-center shadow-md">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </a>
+
+                <!-- Auth Navigation Area -->
+                <div id="authNavArea" class="shrink-0">
+                    <a href="login.html" class="inline-flex items-center justify-center text-xs font-bold bg-neonOrange hover:bg-orange-600 px-3.5 sm:px-4 py-2 rounded-xl transition text-white shadow-lg shadow-neonOrange/20 whitespace-nowrap">
+                        <span class="sm:hidden">Login</span>
+                        <span class="hidden sm:inline">Login / Register</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Drawer Toggle Button -->
+                <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl bg-cardDark border border-borderDark text-gray-300 hover:text-white shrink-0">
+                    <i data-lucide="menu" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer (3-lines menu) -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-cardDark/95 backdrop-blur-2xl border-b border-borderDark px-6 py-4 space-y-3">
+            <div id="mobileLinksContainer">
+                <a href="index.html" class="block py-2 text-neonOrange font-bold border-b border-borderDark/40">Home</a>
+            </div>
+            
+            <!-- Mobile Profile Link (Only Visible when Logged In) -->
+            <a href="profile.html" id="mobileProfileLink" class="hidden py-2 text-neonYellow font-semibold border-b border-borderDark/40 flex items-center gap-2">
+                <i data-lucide="user" class="w-4 h-4"></i> Profile
+            </a>
+
+            <!-- Mobile Auth Action Button -->
+            <div id="mobileAuthLink" class="pt-2">
+                <a href="login.html" class="block text-center py-2.5 bg-neonOrange text-white font-bold rounded-xl text-sm">Login / Register Account</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Content with Live Video Background -->
+    <main class="pt-24 sm:pt-28 pb-16 flex-grow flex items-center relative overflow-hidden">
+        
+        <!-- Live Background Video Container -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="absolute inset-0 bg-techDark/85 z-10"></div>
+            <video autoplay muted loop playsinline class="w-full h-full object-cover filter brightness-5 contrast-125 scale-105">
+                <source src="generated_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Glow Accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-neonOrange/15 rounded-full blur-[120px] pointer-events-none glow-effect z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-20 w-full">
+            <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-cardDark/90 border border-neonOrange/30 text-neonYellow px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold uppercase font-mono shadow-inner backdrop-blur-md">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-neonOrange"></i> Business Feasibility Study Concept
+                </div>
+                <h1 class="text-3xl sm:text-5xl xl:text-6xl font-heading font-black leading-tight text-white drop-shadow-lg">
+                    Crispy Pancit Canton Rolls <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonOrange via-orange-400 to-neonYellow">Evolved.</span>
+                </h1>
+                <p class="text-gray-200 text-sm sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light drop-shadow">
+                    Transforming familiar Pancit Canton noodles wrapped in lumpia casing, deep-fried to golden perfection, coated with cheese, egg, breadcrumbs, and mayo.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-2">
+                    <a href="login.html" id="ctaOrderBtn" class="bg-neonOrange hover:bg-orange-600 text-white font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-xl shadow-neonOrange/25 transition flex items-center justify-center gap-2 text-sm sm:text-base">
+                        Launch Order Builder <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                    </a>
+                    <a href="login.html" id="ctaConceptBtn" class="glass-panel text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl hover:bg-cardDark transition flex items-center justify-center gap-2 text-sm sm:text-base">
+                        Explore Concept <i data-lucide="book-open" class="w-4 h-4 sm:w-5 sm:h-5 text-neonYellow"></i>
+                    </a>
+                </div>
+
+                <!-- Feasibility Metrics -->
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3 pt-6 border-t border-borderDark/60">
+                    <div class="bg-cardDark/70 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-borderDark/40">
+                        <span class="block text-lg sm:text-2xl font-heading font-black text-neonYellow">₱10 - ₱20</span>
+                        <span class="text-[9px] sm:text-[10px] text-gray-300 font-mono uppercase">Student Price</span>
+                    </div>
+                    <div class="bg-cardDark/70 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-borderDark/40">
+                        <span class="block text-lg sm:text-2xl font-heading font-black text-white">100%</span>
+                        <span class="text-[9px] sm:text-[10px] text-gray-300 font-mono uppercase">Target Interest</span>
+                    </div>
+                    <div class="bg-cardDark/70 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-borderDark/40">
+                        <span class="block text-lg sm:text-2xl font-heading font-black text-neonOrange">66.7%</span>
+                        <span class="text-[9px] sm:text-[10px] text-gray-300 font-mono uppercase">Weekly Demand</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expanded & Clickable Ad Video Showcase Frame -->
+            <div class="lg:col-span-6 flex justify-center w-full">
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 w-full max-w-lg lg:max-w-xl border border-neonOrange/40 shadow-2xl">
+                    
+                    <!-- Clickable Container linking to Order Builder -->
+                    <div onclick="window.location.href='login.html'" class="relative h-72 sm:h-96 rounded-2xl overflow-hidden group cursor-pointer shadow-inner">
+                        
+                        <!-- Video with Audio Capability (Muted by default to comply with browser autoplay policies) -->
+                        <video id="adVideo" autoplay muted loop playsinline poster="Gemini_Generated_Image_nt23ient23ient23.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <source src="29f52784-faa7-4055-8df9-139d05e90e8b.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-techDark via-techDark/20 to-transparent opacity-80 pointer-events-none"></div>
+                        
+                        <!-- Top Badges -->
+                        <div class="absolute top-3 right-3 bg-neonOrange/90 text-white font-heading font-bold text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-lg backdrop-blur-md z-10">
+                            <i data-lucide="zap" class="w-3.5 h-3.5 fill-current"></i> Golden Crunch
+                        </div>
+                        
+                        <div class="absolute top-3 left-3 bg-techDark/85 border border-neonYellow/40 text-neonYellow font-mono font-bold text-[10px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow backdrop-blur-md z-10">
+                            <i data-lucide="video" class="w-3.5 h-3.5"></i>  ADVERTISEMENT
+                        </div>
+
+                        <!-- Interactive Audio Toggle Button (Stops click propagation so it doesn't trigger the card link) -->
+                        <button id="audioToggleBtn" onclick="toggleAudio(event)" class="absolute bottom-24 right-4 z-30 bg-techDark/90 border border-neonOrange/50 hover:bg-neonOrange text-white p-3 rounded-full shadow-xl transition flex items-center justify-center backdrop-blur-md group-hover:scale-110" title="Toggle Sound">
+                            <i data-lucide="volume-x" id="audioIcon" class="w-5 h-5 text-neonYellow group-hover:text-white"></i>
+                        </button>
+
+                        <!-- Card Information Overlay -->
+                        <div class="absolute bottom-5 left-5 right-20 text-white z-10 pointer-events-none">
+                            <h3 class="text-lg sm:text-xl font-heading font-bold drop-shadow">Crispy Pancit Canton Rolls</h3>
+                            <p class="text-xs sm:text-sm text-neonYellow font-mono font-semibold flex items-center gap-1 mt-1">
+                                Tap to Order Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cardDark/80 border-t border-borderDark/60 py-6 text-center text-xs text-gray-400 relative z-20">
+        <p>© 2026 Crisp PanTon Rolls | Free Elective 1 Business Analytics & Event Driven Programming Project — Cebu Eastern College</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Toggle mobile drawer
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        });
+
+        // Audio Toggle Functionality
+        function toggleAudio(event) {
+            event.stopPropagation(); // Prevents clicking the audio button from triggering the main card link
+            const video = document.getElementById('adVideo');
+            const icon = document.getElementById('audioIcon');
+            const btn = document.getElementById('audioToggleBtn');
+            
+            if (video.muted) {
+                video.muted = false;
+                video.volume = 1.0;
+                icon.setAttribute('data-lucide', 'volume-2');
+                icon.classList.remove('text-neonYellow');
+                icon.classList.add('text-white');
+                btn.classList.add('bg-neonOrange', 'border-white');
+                btn.classList.remove('bg-techDark/90');
+            } else {
+                video.muted = true;
+                icon.setAttribute('data-lucide', 'volume-x');
+                icon.classList.add('text-neonYellow');
+                icon.classList.remove('text-white');
+                btn.classList.remove('bg-neonOrange', 'border-white');
+                btn.classList.add('bg-techDark/90');
+            }
+            lucide.createIcons();
+        }
+
+        // Check authentication state
+        const currentUser = localStorage.getItem('crisp_current_user');
+
+        if (currentUser) {
+            // --- LOGGED IN STATE ---
+            document.getElementById('desktopNavLinks').innerHTML = `
+                <a href="index.html" class="text-neonOrange font-bold">Home</a>
+                <a href="concept.html" class="hover:text-neonOrange transition">Concept</a>
+                <a href="gallery.html" class="hover:text-neonOrange transition">Gallery</a>
+                <a href="menu.html" class="hover:text-neonOrange transition">Menu</a>
+                <a href="order.html" class="hover:text-neonOrange transition">Order Builder</a>
+            `;
+
+            document.getElementById('mobileLinksContainer').innerHTML = `
+                <a href="index.html" class="block py-2 text-neonOrange font-bold border-b border-borderDark/40">Home</a>
+                <a href="concept.html" class="block py-2 text-gray-300 border-b border-borderDark/40">Concept</a>
+                <a href="gallery.html" class="block py-2 text-gray-300 border-b border-borderDark/40">Gallery</a>
+                <a href="menu.html" class="block py-2 text-gray-300 border-b border-borderDark/40">Menu</a>
+                <a href="order.html" class="block py-2 text-gray-300 border-b border-borderDark/40">Order Builder</a>
+            `;
+
+            // Redirect CTA buttons to actual pages
+            document.getElementById('ctaOrderBtn').href = 'order.html';
+            document.getElementById('ctaConceptBtn').href = 'concept.html';
+
+            // Show Profile Icon & Logout
+            document.getElementById('profileIconBtn').classList.remove('hidden');
+            document.getElementById('mobileProfileLink').classList.remove('hidden');
+            document.getElementById('mobileProfileLink').classList.add('flex');
+
+            document.getElementById('authNavArea').innerHTML = `
+                <button onclick="logoutUser()" class="hidden sm:inline-block text-xs bg-red-500/20 border border-red-500/40 text-red-300 px-3 py-2 rounded-xl hover:bg-red-500/30 transition">Logout</button>
+            `;
+
+            document.getElementById('mobileAuthLink').innerHTML = `
+                <div class="pt-2 border-t border-borderDark/40">
+                    <div class="text-xs text-neonYellow font-mono font-bold mb-2">Signed in: ${currentUser}</div>
+                    <button onclick="logoutUser()" class="w-full py-2.5 bg-red-500/20 text-red-300 font-bold rounded-xl border border-red-500/40 flex items-center justify-center gap-2 text-sm">
+                        <i data-lucide="log-out" class="w-4 h-4"></i> Logout Account
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
+        } else {
+            // --- NOT LOGGED IN STATE ---
+            document.getElementById('desktopNavLinks').innerHTML = `
+                <a href="index.html" class="text-neonOrange font-bold">Home</a>
+            `;
+            document.getElementById('mobileLinksContainer').innerHTML = `
+                <a href="index.html" class="block py-2 text-neonOrange font-bold border-b border-borderDark/40">Home</a>
+            `;
+
+            // Redirect CTA buttons to login.html
+            document.getElementById('ctaOrderBtn').href = 'login.html';
+            document.getElementById('ctaConceptBtn').href = 'login.html';
+
+            // Hide profile icons
+            document.getElementById('profileIconBtn').classList.add('hidden');
+            document.getElementById('mobileProfileLink').classList.add('hidden');
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('crisp_current_user');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

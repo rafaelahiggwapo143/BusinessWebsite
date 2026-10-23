@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile & Order History | Crisp PanTon Rolls</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    colors: { neonOrange: '#FF5500', neonYellow: '#FFC700', techDark: '#0B0F17', cardDark: '#161F30', borderDark: '#233047' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel { background: rgba(22, 31, 48, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 85, 0, 0.2); }
+        .glass-hover:hover { border-color: rgba(255, 85, 0, 0.5); transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-techDark text-gray-100 font-sans min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-techDark/90 backdrop-blur-xl border-b border-borderDark/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2.5">
+                <div class="bg-gradient-to-tr from-neonOrange to-neonYellow text-techDark p-2 rounded-xl font-bold shadow-lg shadow-neonOrange/20">
+                    <i data-lucide="flame" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-heading font-black text-white">CRISP<span class="text-neonOrange">PANTON</span></span>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-6 font-medium text-sm text-gray-300">
+                <a href="index.html" class="hover:text-neonOrange transition">Home</a>
+                <a href="concept.html" class="hover:text-neonOrange transition">Concept</a>
+                <a href="menu.html" class="hover:text-neonOrange transition">Menu</a>
+                <a href="order.html" class="hover:text-neonOrange transition">Order Builder</a>
+                <a href="profile.html" class="text-neonOrange font-bold">My Profile</a>
+            </div>
+
+            <button onclick="logout()" class="text-xs bg-red-500/20 text-red-300 border border-red-500/40 px-3.5 py-2 rounded-xl hover:bg-red-500/30 transition flex items-center gap-1.5">
+                <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Profile Dashboard -->
+    <main class="pt-28 pb-16 flex-grow max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- User Info Card -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-neonOrange/30 text-center relative overflow-hidden shadow-2xl">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-neonOrange/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="w-20 h-20 bg-gradient-to-tr from-neonOrange to-neonYellow text-techDark font-heading font-black text-3xl rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-neonOrange/30" id="userAvatarInitials">
+                        RA
+                    </div>
+                    
+                    <h2 class="text-xl font-heading font-bold text-white" id="profileName">Rafael Ahig</h2>
+                    <p class="text-xs text-neonYellow font-mono mt-1" id="profileEmail">rafael@cebu-east.edu.ph</p>
+                    <span class="inline-block mt-3 px-3 py-1 bg-cardDark border border-borderDark text-[10px] font-mono uppercase text-gray-300 rounded-full">
+                        Cebu Eastern College Student
+                    </span>
+
+                    <div class="mt-6 pt-6 border-t border-borderDark text-left space-y-3 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">Total Orders:</span> <span class="text-white font-bold" id="statTotalOrders">0</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Account Status:</span> <span class="text-green-400 font-bold">Active & Verified</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Member Since:</span> <span class="text-gray-300 font-mono">September 2026</span></div>
+                    </div>
+                </div>
+
+                <!-- Quick Action Card -->
+                <div class="glass-panel rounded-2xl p-6 border border-borderDark space-y-3">
+                    <h3 class="text-xs font-mono uppercase text-neonOrange font-bold">Quick Actions</h3>
+                    <a href="order.html" class="w-full py-3 bg-neonOrange hover:bg-orange-600 text-white font-bold text-xs uppercase rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-neonOrange/20">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Create New Order
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order History & Tracking Section -->
+            <div class="lg:col-span-8 space-y-6">
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-borderDark shadow-2xl">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 pb-4 border-b border-borderDark gap-2">
+                        <div>
+                            <span class="text-neonOrange font-mono text-xs uppercase tracking-widest">Activity Feed</span>
+                            <h2 class="text-2xl font-heading font-bold text-white mt-1">My Order History</h2>
+                        </div>
+                        <button onclick="clearHistory()" class="text-xs bg-cardDark border border-borderDark px-3 py-1.5 rounded-xl text-gray-400 hover:text-red-400 hover:border-red-400 transition">
+                            Clear History
+                        </button>
+                    </div>
+
+                    <!-- Orders Container -->
+                    <div id="ordersContainer" class="space-y-4">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-cardDark/80 border-t border-borderDark/60 py-6 text-center text-xs text-gray-400">
+        <p>© 2026 Crisp PanTon Rolls | User Dashboard</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Enforce Authentication
+        const currentUser = localStorage.getItem('crisp_current_user');
+        if (!currentUser) {
+            alert("Please log in to view your profile and order history.");
+            window.location.href = "login.html";
+        }
+
+        // Set Profile details
+        document.getElementById('profileName').innerText = currentUser;
+        document.getElementById('profileEmail').innerText = `${currentUser.toLowerCase().replace(/\s+/g, '')}@cebu-east.edu.ph`;
+        document.getElementById('userAvatarInitials').innerText = currentUser.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+        function loadOrders() {
+            const ordersContainer = document.getElementById('ordersContainer');
+            let orders = JSON.parse(localStorage.getItem('crisp_user_orders') || '[]');
+            
+            document.getElementById('statTotalOrders').innerText = orders.length;
+
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div class="text-center py-12 space-y-3 bg-techDark/40 rounded-2xl border border-borderDark">
+                        <i data-lucide="receipt" class="w-12 h-12 text-gray-500 mx-auto"></i>
+                        <p class="text-sm text-gray-400 font-medium">No order history found yet.</p>
+                        <a href="order.html" class="inline-block px-4 py-2 bg-neonOrange text-white text-xs font-bold rounded-xl">Build Your First Order</a>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            ordersContainer.innerHTML = orders.map((order, idx) => `
+                <div class="glass-panel glass-hover rounded-2xl p-5 border border-borderDark space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs border-b border-borderDark/60 pb-3 gap-1">
+                        <span class="text-neonYellow font-mono font-bold">Order #${1000 + idx}</span>
+                        <span class="text-gray-400">${order.date}</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div>
+                            <span class="text-gray-500 block">Flavor</span>
+                            <span class="text-white font-bold">${order.flavor}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500 block">Size</span>
+                            <span class="text-white font-bold">${order.size}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500 block">Quantity</span>
+                            <span class="text-white font-bold">${order.qty} pcs</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500 block">Total Amount</span>
+                            <span class="text-neonYellow font-heading font-black text-sm">₱${order.total}.00</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 text-[11px] font-mono">
+                        <span class="px-2.5 py-1 bg-green-500/20 text-green-300 border border-green-500/30 rounded-full flex items-center gap-1">
+                            <i data-lucide="check-circle-2" class="w-3 h-3"></i> Confirmed & Ready for Pickup
+                        </span>
+                        <span class="text-gray-400">Cebu Eastern College Campus Stall</span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function clearHistory() {
+            if (confirm("Are you sure you want to clear your order history?")) {
+                localStorage.removeItem('crisp_user_orders');
+                loadOrders();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('crisp_current_user');
+            window.location.href = "login.html";
+        }
+
+        loadOrders();
+    </script>
+</body>
+</html>
